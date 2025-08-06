@@ -1,7 +1,12 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @plugin "@tailwindcss/container-queries";
 @plugin "@tailwindcss/typography";
+
+@theme {
+  --color-scheme: light dark;
+}
 
 @layer base {
   *,
@@ -11,10 +16,13 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
+  
+  /* Ensure dark mode class works properly */
+  :root {
+    color-scheme: light;
+  }
+  
+  :root.dark {
     color-scheme: dark;
   }
 }

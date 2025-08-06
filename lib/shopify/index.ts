@@ -6,9 +6,9 @@ import {
 import { isShopifyError } from 'lib/type-guards';
 import { ensureStartsWith } from 'lib/utils';
 import {
-  revalidateTag,
+  unstable_cacheLife as cacheLife,
   unstable_cacheTag as cacheTag,
-  unstable_cacheLife as cacheLife
+  revalidateTag
 } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -58,6 +58,8 @@ import {
   ShopifyUpdateCartOperation
 } from './types';
 
+const PLACEHOLDER_MODE = process.env.SHOPIFY_PLACEHOLDER_MODE === 'true';
+
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
   : '';
@@ -77,6 +79,13 @@ export async function shopifyFetch<T>({
   query: string;
   variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
+  if (PLACEHOLDER_MODE) {
+    // Short-circuit all Shopify fetches in placeholder mode
+    // Return an empty-ish successful shape to avoid throwing in callers.
+    // @ts-expect-error: T will not be used in placeholder mode
+    return { status: 200, body: { data: {} } };
+  }
+
   try {
     const result = await fetch(endpoint, {
       method: 'POST',
@@ -264,23 +273,32 @@ export async function updateCart(
 }
 
 export async function getCart(): Promise<Cart | undefined> {
+  if (PLACEHOLDER_MODE) {
+    return undefined;
+  }
+
   const cartId = (await cookies()).get('cartId')?.value;
 
   if (!cartId) {
     return undefined;
   }
 
-  const res = await shopifyFetch<ShopifyCartOperation>({
-    query: getCartQuery,
-    variables: { cartId }
-  });
+  try {
+    const res = await shopifyFetch<ShopifyCartOperation>({
+      query: getCartQuery,
+      variables: { cartId }
+    });
 
-  // Old carts becomes `null` when you checkout.
-  if (!res.body.data.cart) {
+    // Old carts becomes `null` when you checkout.
+    if (!res.body?.data?.cart) {
+      return undefined;
+    }
+
+    return reshapeCart(res.body.data.cart);
+  } catch {
+    // Swallow errors in placeholder/misconfigured environments to keep site rendering
     return undefined;
   }
-
-  return reshapeCart(res.body.data.cart);
 }
 
 export async function getCollection(

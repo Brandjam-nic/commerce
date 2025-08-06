@@ -12,10 +12,16 @@ import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+const PLACEHOLDER_MODE = process.env.SHOPIFY_PLACEHOLDER_MODE === 'true';
+
 export async function addItem(
   prevState: any,
   selectedVariantId: string | undefined
 ) {
+  if (PLACEHOLDER_MODE) {
+    return 'Cart disabled in placeholder mode';
+  }
+
   if (!selectedVariantId) {
     return 'Error adding item to cart';
   }
@@ -29,6 +35,10 @@ export async function addItem(
 }
 
 export async function removeItem(prevState: any, merchandiseId: string) {
+  if (PLACEHOLDER_MODE) {
+    return 'Cart disabled in placeholder mode';
+  }
+
   try {
     const cart = await getCart();
 
@@ -58,6 +68,10 @@ export async function updateItemQuantity(
     quantity: number;
   }
 ) {
+  if (PLACEHOLDER_MODE) {
+    return 'Cart disabled in placeholder mode';
+  }
+
   const { merchandiseId, quantity } = payload;
 
   try {
@@ -96,11 +110,19 @@ export async function updateItemQuantity(
 }
 
 export async function redirectToCheckout() {
+  if (PLACEHOLDER_MODE) {
+    return 'Checkout disabled in placeholder mode';
+  }
   let cart = await getCart();
   redirect(cart!.checkoutUrl);
 }
 
 export async function createCartAndSetCookie() {
+  if (PLACEHOLDER_MODE) {
+    // Set a dummy cartId just to avoid errors in client flows if referenced.
+    (await cookies()).set('cartId', 'placeholder-cart');
+    return;
+  }
   let cart = await createCart();
   (await cookies()).set('cartId', cart.id!);
 }

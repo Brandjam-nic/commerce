@@ -1,10 +1,9 @@
-import { Carousel } from 'components/carousel';
-import { ThreeItemGrid } from 'components/grid/three-items';
+import PlaceholderHome from 'components/home/placeholder-home';
 import Footer from 'components/layout/footer';
 
 export const metadata = {
   description:
-    'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
+    'Military Resilience Clothing Co — mission-driven apparel honoring service, resilience, and community.',
   openGraph: {
     type: 'website'
   }
@@ -13,8 +12,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      <ThreeItemGrid />
-      <Carousel />
+      <PlaceholderHome />
       <Footer />
     </>
   );
