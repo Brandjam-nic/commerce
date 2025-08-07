@@ -3,7 +3,7 @@
 Brand: Military Resilience
 
 Purpose:
-Empower military personnel, veterans, families, and supporters by providing high‑quality apparel and goods that celebrate service, resilience, and community.
+Empower military personnel, veterans, families, first responders, supporters, and communities by providing high‑quality apparel and goods that celebrate service, resilience, and community while spreading the “PUSH FORWARD” message.
 
 Audience:
 - Active duty and reserve personnel
@@ -18,9 +18,9 @@ Value Proposition:
 - Inclusive sizing and accessible shopping experience
 
 Tone and Messaging:
-- Respectful, authentic, and empowering
-- Community-first and mission-driven
-- Clarity over hype; no exploitative language
+- Respectful, authentic, empowering; community-first and mission-driven
+- “PUSH FORWARD” as a core brand mantra: resilience is real, help is available, overcome challenges
+- Clarity over hype; no exploitative language; inclusive of veterans, first responders, families, and supporters
 
 Core UX Flows:
 - Landing/Home: highlight collections, best sellers, mission
@@ -31,7 +31,8 @@ Core UX Flows:
 - Post‑purchase: order confirmation and tracking via Shopify
 
 Content Requirements:
-- Brand story: about mission and impact
+- Brand story: mission, impact, and vision to give back to those who put others first
+- Message sections for site pages: “Our Message”, “PUSH FORWARD” definition and philosophy
 - Product imagery: front/back, detail shots, on‑model
 - Size guides: per category (tops, bottoms, unisex)
 - Care instructions
@@ -51,7 +52,8 @@ KPIs:
 - Time to first contentful paint (performance)
 
 Open Questions / TODO:
-- Finalize donation/impact model and messaging
+- Finalize donation/impact model and messaging; define percentage and beneficiaries
 - Brand style guide (colors, typography, logo usage)
 - Specific product categories and initial catalog
 - Regional shipping policy and taxes
+- Identify content placements for “Our Message” and “PUSH FORWARD” sections (e.g., About, Home hero, Footer blurb)

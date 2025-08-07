@@ -35,8 +35,8 @@ export default async function RootLayout({
     : getCart();
 
   return (
-    <html lang="en" className={`${GeistSans.variable} bg-neutral-50 dark:bg-neutral-900`}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+    <html lang="en" className={`${GeistSans.variable}`}>
+      <body className="text-black selection:bg-teal-300 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         {/* No-flash theme script: runs before hydration to set initial theme */}
         <script
           dangerouslySetInnerHTML={{

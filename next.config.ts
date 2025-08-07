@@ -11,6 +11,11 @@ export default {
         protocol: 'https',
         hostname: 'cdn.shopify.com',
         pathname: '/s/files/**'
+      },
+      // Allow Unsplash images for hero background
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com'
       }
     ]
   }

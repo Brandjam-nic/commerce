@@ -33,35 +33,38 @@ export default async function CollectionPage({ params }: Props) {
   const items = getProductsByCollection(decoded as CollectionHandle);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-12">
+    <section className="mx-auto max-w-7xl px-6 py-12">
       <h1 className="mb-6 text-2xl font-semibold">{decoded}</h1>
 
       {items.length === 0 ? (
         <p className="text-neutral-500 dark:text-neutral-400">No products found.</p>
       ) : (
-        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {items.map((p) => (
-            <li
-              key={p.handle}
-              className="group rounded-lg border border-neutral-200 p-4 transition hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600"
-            >
+            <li key={p.handle} className="group">
               <Link href={`/product/${p.handle}`} prefetch={true} className="block">
-                <div className="relative mb-3 aspect-[4/3] w-full overflow-hidden rounded">
-                  <Image
-                    src={p.image || '/logos/IconBlack.png'}
-                    alt={p.title}
-                    fill
-                    className="object-contain"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  />
+                {/* Clean product card with subtle border */}
+                <div className="border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+                  {/* Product image with taller aspect ratio */}
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
+                    <Image
+                      src={p.image || '/logos/IconBlack.png'}
+                      alt={p.title}
+                      fill
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
+                    />
+                  </div>
+                  {/* Product info below image */}
+                  <div className="py-3 text-center">
+                    <h3 className="mb-1 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                      {p.title}
+                    </h3>
+                    <p className="text-sm text-neutral-900 dark:text-neutral-100">
+                      ${p.price === null ? 'TBD' : p.price.toFixed(2)}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-medium">{p.title}</h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                  {p.currency} {p.price === null ? 'TBD' : p.price.toFixed(2)}
-                </p>
-                <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                  Made in {p.madeIn}
-                </p>
               </Link>
             </li>
           ))}

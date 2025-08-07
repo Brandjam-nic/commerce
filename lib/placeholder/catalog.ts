@@ -11,7 +11,7 @@ export type PlaceholderProduct = {
   handle: string;
   title: string;
   description?: string;
-  collection: 'Caps' | 'T-Shirts' | 'Hoodies' | 'Accessories';
+  collection: 'T-Shirts' | 'Caps' | 'Hoodies' | 'Accessories';
   specs: string[];
   madeIn: string;
   currency: 'AUD';
@@ -24,13 +24,95 @@ export type PlaceholderProduct = {
   }[];
 };
 
-export const collections = ['Caps', 'T-Shirts', 'Hoodies', 'Accessories'] as const;
+export const collections = ['T-Shirts', 'Caps', 'Hoodies', 'Accessories'] as const;
 export type CollectionHandle = typeof collections[number];
 
 export const placeholderImage = '/images/T-Shirt-ProductIMage.jpg';
 export const placeholderHatImage = '/images/Testhat.png';
+export const placeholderShirtAlt = '/images/ShirtManTest.png';
+export const placeholderWomanShirt = '/images/WOMANT.png';
+export const placeholderAlt = '/images/Test2.jpg';
 
 export const products: PlaceholderProduct[] = [
+  // T-Shirts (S–3XL)
+  {
+    handle: 'military-olive-tshirt',
+    title: 'Military Olive T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'Camo Logo Design'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderImage,
+    variants: sizes()
+  },
+  {
+    handle: 'military-blue-tshirt',
+    title: 'Military Blue T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'Ice Camo Logo Design'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderShirtAlt,
+    variants: sizes()
+  },
+  {
+    handle: 'military-grey-tshirt',
+    title: 'Military Grey T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'Urban Camo Logo Design'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderImage,
+    variants: sizes()
+  },
+  {
+    handle: 'illume-white-tshirt',
+    title: 'Illume (White) T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'Black Logo'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderWomanShirt,
+    variants: sizes()
+  },
+  {
+    handle: 'night-ops-black-tshirt',
+    title: 'Night Ops (Black) T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'White Logo'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderShirtAlt,
+    variants: sizes()
+  },
+  {
+    handle: 'sky-blue-tshirt',
+    title: 'Sky (Blue) T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'White Logo'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderImage,
+    variants: sizes()
+  },
+  {
+    handle: 'desert-sand-tshirt',
+    title: 'Desert Sand T-Shirt',
+    collection: 'T-Shirts',
+    specs: ['100% Cotton', '250 GSM', 'Brown Logo'],
+    madeIn: 'Vietnam',
+    currency: 'AUD',
+    price: null,
+    image: placeholderAlt,
+    variants: sizes()
+  },
+
   // Caps
   {
     handle: 'herringbone-blue-cap',
@@ -59,74 +141,6 @@ export const products: PlaceholderProduct[] = [
     image: placeholderHatImage
   },
 
-  // T-Shirts (S–3XL)
-  {
-    handle: 'military-olive-tshirt',
-    title: 'Military Olive T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'Camo Logo Design'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-  {
-    handle: 'military-blue-tshirt',
-    title: 'Military Blue T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'Ice Camo Logo Design'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-  {
-    handle: 'military-grey-tshirt',
-    title: 'Military Grey T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'Urban Camo Logo Design'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-  {
-    handle: 'illume-white-tshirt',
-    title: 'Illume (White) T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'Black Logo'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-  {
-    handle: 'night-ops-black-tshirt',
-    title: 'Night Ops (Black) T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'White Logo'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-  {
-    handle: 'sky-blue-tshirt',
-    title: 'Sky (Blue) T-Shirt',
-    collection: 'T-Shirts',
-    specs: ['100% Cotton', '250 GSM', 'White Logo'],
-    madeIn: 'Vietnam',
-    currency: 'AUD',
-    price: null,
-    image: placeholderImage,
-    variants: sizes()
-  },
-
   // Hoodies (S–3XL)
   {
     handle: 'night-ops-hoodie',
@@ -136,7 +150,7 @@ export const products: PlaceholderProduct[] = [
     madeIn: 'Vietnam',
     currency: 'AUD',
     price: null,
-    image: placeholderImage,
+    image: placeholderShirtAlt,
     variants: sizes()
   },
   {
@@ -158,7 +172,7 @@ export const products: PlaceholderProduct[] = [
     madeIn: 'Vietnam',
     currency: 'AUD',
     price: null,
-    image: placeholderImage,
+    image: placeholderAlt,
     variants: sizes()
   },
 
@@ -171,7 +185,7 @@ export const products: PlaceholderProduct[] = [
     madeIn: 'Vietnam',
     currency: 'AUD',
     price: null,
-    image: placeholderImage
+    image: placeholderAlt
   }
 ];
 

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import Label from '../label';
+import Price from '../price';
 
 export function GridTileImage({
   isInteractive = true,
@@ -20,29 +20,44 @@ export function GridTileImage({
   return (
     <div
       className={clsx(
-        'group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black',
+        // Clean card container with subtle border
+        'group flex h-full w-full flex-col border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950',
         {
-          relative: label,
-          'border-2 border-blue-600': active,
-          'border-neutral-200 dark:border-neutral-800': !active
+          'ring-2 ring-blue-600': active
         }
       )}
     >
-      {props.src ? (
-        <Image
-          className={clsx('relative h-full w-full object-contain', {
-            'transition duration-300 ease-in-out group-hover:scale-105': isInteractive
-          })}
-          {...props}
-        />
-      ) : null}
+      {/* Image container */}
+      <div className="relative w-full flex-1 overflow-hidden bg-white dark:bg-neutral-900">
+        {/* Taller aspect ratio for product images like in reference */}
+        <div className="relative aspect-[3/4] w-full">
+          {props.src ? (
+            <Image
+              className={clsx(
+                // Product image: cover to fill the frame
+                'h-full w-full object-cover object-center',
+                { 'transition-transform duration-300 ease-out group-hover:scale-105': isInteractive }
+              )}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+              {...props}
+            />
+          ) : null}
+        </div>
+      </div>
+
+      {/* Product info below image */}
       {label ? (
-        <Label
-          title={label.title}
-          amount={label.amount}
-          currencyCode={label.currencyCode}
-          position={label.position}
-        />
+        <div className="px-1 py-3 text-center">
+          <h3 className="mb-1 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            {label.title}
+          </h3>
+          <Price
+            className="text-sm text-neutral-900 dark:text-neutral-100"
+            amount={label.amount}
+            currencyCode={label.currencyCode}
+            currencyCodeClassName="hidden"
+          />
+        </div>
       ) : null}
     </div>
   );
